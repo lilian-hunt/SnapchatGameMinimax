@@ -3,10 +3,29 @@ public class Run {
 	public static final int NUM_CANDLES = 10;
 
 	public static void main(String[] args){
-		computerFirst();
-		// userFirst();
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter 0 to start first, otherwise the computer will start: ");
+		boolean userStart = false;
+		try {
+			if (s.nextInt() == 0){
+				userStart = true;
+				System.out.println("\nYou will start!");
+			}
+			else {
+				System.out.println("\nComputer will start!");
+			}
+		}
+		catch (InputMismatchException e){
+			System.out.println("\nComputer will start!");
+		}
+		if (userStart){
+			userFirst();
+		}
+		else {
+			computerFirst();
+		}	
 	}
-
+	
 	public static void computerFirst(){
 		Node rootNode = new Node(true, NUM_CANDLES, 0);
 		Tree t = new Tree(rootNode);
@@ -14,7 +33,7 @@ public class Run {
 		t.evalTree();
 		int i = 0;
 		Scanner s = new Scanner(System.in);
-
+		
 		Node currentNode = rootNode;
 		while (i < NUM_CANDLES) {
 			System.out.println("The Computer's Turn!");
@@ -40,7 +59,7 @@ public class Run {
 				}
 				currentNode = currentNode.getNextChildGivenMove(val);
 				System.out.println("\n** Total candles remaining: " + (NUM_CANDLES-i) +"\n");
-
+				
 			}
 			catch (InputMismatchException e){
 				s.nextLine();
@@ -56,7 +75,7 @@ public class Run {
 		t.evalTree();
 		int i = 0;
 		Scanner s = new Scanner(System.in);
-
+		
 		Node currentNode = rootNode;
 		while (i < NUM_CANDLES) {
 			System.out.print("Light 1 or 2 candles: ");
